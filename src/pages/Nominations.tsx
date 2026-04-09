@@ -7,7 +7,7 @@ const nominations = [
   { id: 2, title: "Slay SCHOOL Queen", emoji: "👸🏻", desc: "Лучшая учительница-королева школы" },
   { id: 3, title: "Slay SCHOOL преданный своей работе", emoji: "💼", desc: "Самый преданный своему делу" },
   { id: 4, title: "Slay SCHOOL завуч года", emoji: "🏆", desc: "Лучший завуч школы" },
-  { id: 5, title: "Slay SCHOOL мемный учитель", emoji: "😂", desc: "Самый весёлый и мемный" },
+  { id: 5, title: "Slay SCHOOL веселый учитель", emoji: "😄", desc: "Самый весёлый и позитивный" },
   { id: 6, title: "Slay SCHOOL активный в своей работе", emoji: "⚡", desc: "Самый активный и энергичный" },
   { id: 7, title: "Slay SCHOOL добрый учитель", emoji: "💛", desc: "Самый добрый и отзывчивый" },
   { id: 8, title: "Slay SCHOOL учитель математики", emoji: "📐", desc: "Лучший учитель математики" },
