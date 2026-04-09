@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "Get teachers for nomination 2",
+      "method": "GET",
+      "path": "/?action=teachers&nomination_id=2",
+      "expectedStatus": 200,
+      "expectedBody": {"teachers": [{"id": 3, "name": "Виктория Андреевна"}]},
+      "bodyMatcher": "partial"
+    }
+  ]
+}
