@@ -12,7 +12,7 @@ const nominations: Record<number, { title: string; emoji: string }> = {
   5: { title: "Slay SCHOOL веселый учитель", emoji: "😄" },
   6: { title: "Slay SCHOOL активный в своей работе", emoji: "⚡" },
   7: { title: "Slay SCHOOL добрый учитель", emoji: "💛" },
-  8: { title: "Slay SCHOOL учитель математики", emoji: "📐" },
+  8: { title: "Slay SCHOOL учитель технических наук", emoji: "🔧" },
   9: { title: "Slay SCHOOL учитель русского языка", emoji: "📝" },
   10: { title: "Slay SCHOOL учитель информатики", emoji: "💻" },
   11: { title: "Slay SCHOOL учитель иностранных языков", emoji: "🌍" },

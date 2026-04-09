@@ -10,7 +10,7 @@ const nominations = [
   { id: 5, title: "Slay SCHOOL веселый учитель", emoji: "😄", desc: "Самый весёлый и позитивный" },
   { id: 6, title: "Slay SCHOOL активный в своей работе", emoji: "⚡", desc: "Самый активный и энергичный" },
   { id: 7, title: "Slay SCHOOL добрый учитель", emoji: "💛", desc: "Самый добрый и отзывчивый" },
-  { id: 8, title: "Slay SCHOOL учитель математики", emoji: "📐", desc: "Лучший учитель математики" },
+  { id: 8, title: "Slay SCHOOL учитель технических наук", emoji: "🔧", desc: "Лучший учитель технических наук" },
   { id: 9, title: "Slay SCHOOL учитель русского языка", emoji: "📝", desc: "Лучший учитель русского языка" },
   { id: 10, title: "Slay SCHOOL учитель информатики", emoji: "💻", desc: "Лучший учитель информатики" },
   { id: 11, title: "Slay SCHOOL учитель иностранных языков", emoji: "🌍", desc: "Лучший учитель иностранных языков" },
