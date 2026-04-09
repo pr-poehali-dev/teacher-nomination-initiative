@@ -9,6 +9,7 @@ import Nominations from "./pages/Nominations";
 import Vote from "./pages/Vote";
 import Results from "./pages/Results";
 import NotFound from "./pages/NotFound";
+import SakuraPetals from "./components/SakuraPetals";
 
 const queryClient = new QueryClient();
 
@@ -17,6 +18,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <SakuraPetals />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />

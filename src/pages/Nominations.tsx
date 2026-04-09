@@ -22,7 +22,7 @@ const Nominations = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-4">
+    <div className="min-h-screen py-10 px-4 relative z-10">
       <div className="max-w-4xl mx-auto">
         <button
           onClick={() => navigate("/")}

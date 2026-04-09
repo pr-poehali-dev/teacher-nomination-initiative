@@ -76,7 +76,7 @@ const Vote = () => {
 
   if (!nomination) {
     return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center relative z-10">
         <div className="text-center">
           <p className="text-gray-500 mb-4">Номинация не найдена</p>
           <button onClick={() => navigate("/nominations")} className="text-blue-500 underline">
@@ -88,7 +88,7 @@ const Vote = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-4">
+    <div className="min-h-screen py-10 px-4 relative z-10">
       <div className="max-w-lg mx-auto">
         <button
           onClick={() => navigate("/nominations")}

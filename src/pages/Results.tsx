@@ -56,7 +56,7 @@ const Results = () => {
 
   if (status === "login" || status === "wrong" || status === "loading") {
     return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
+      <div className="min-h-screen flex items-center justify-center px-4 relative z-10">
         <div className="bg-white rounded-2xl shadow-sm p-8 w-full max-w-sm">
           <div className="text-3xl mb-4 text-center">🔐</div>
           <h1 className="text-xl font-bold text-center mb-1">Результаты голосования</h1>
@@ -88,7 +88,7 @@ const Results = () => {
 
   if (status === "error") {
     return (
-      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center relative z-10">
         <p className="text-red-500">Ошибка загрузки. Попробуйте обновить страницу.</p>
       </div>
     );
@@ -99,7 +99,7 @@ const Results = () => {
     .sort((a, b) => a - b);
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-4">
+    <div className="min-h-screen py-10 px-4 relative z-10">
       <div className="max-w-3xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div>
