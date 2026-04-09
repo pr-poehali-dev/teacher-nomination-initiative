@@ -31,10 +31,14 @@ def handler(event: dict, context) -> dict:
 
     if method == "GET" and action == "teachers":
         return get_teachers(event)
+    elif method == "POST" and action == "check_password":
+        return check_password(event)
     elif method == "POST":
         return cast_vote(event)
     elif method == "GET" and action == "results":
         return get_results(event)
+    elif method == "GET" and action == "all_results":
+        return get_all_results(event)
 
     return {"statusCode": 404, "headers": CORS_HEADERS, "body": json.dumps({"error": "Not found"})}
 
@@ -108,3 +112,43 @@ def get_results(event: dict) -> dict:
 
     results = [{"id": r[0], "name": r[1], "votes": r[2]} for r in rows]
     return {"statusCode": 200, "headers": CORS_HEADERS, "body": json.dumps({"results": results})}
+
+
+def check_password(event: dict) -> dict:
+    body = json.loads(event.get("body") or "{}")
+    password = body.get("password", "")
+    correct = os.environ.get("RESULTS_PASSWORD", "")
+    if password == correct:
+        return {"statusCode": 200, "headers": CORS_HEADERS, "body": json.dumps({"ok": True})}
+    return {"statusCode": 403, "headers": CORS_HEADERS, "body": json.dumps({"ok": False})}
+
+
+def get_all_results(event: dict) -> dict:
+    params = event.get("queryStringParameters") or {}
+    password = params.get("password", "")
+    correct = os.environ.get("RESULTS_PASSWORD", "")
+    if password != correct:
+        return {"statusCode": 403, "headers": CORS_HEADERS, "body": json.dumps({"error": "forbidden"})}
+
+    conn = get_conn()
+    cur = conn.cursor()
+    cur.execute(
+        """
+        SELECT t.nomination_id, t.id, t.name, COUNT(v.id) as vote_count
+        FROM teachers t
+        LEFT JOIN votes v ON v.teacher_id = t.id
+        GROUP BY t.nomination_id, t.id, t.name
+        ORDER BY t.nomination_id, vote_count DESC
+        """
+    )
+    rows = cur.fetchall()
+    conn.close()
+
+    by_nomination: dict = {}
+    for r in rows:
+        nom_id = r[0]
+        if nom_id not in by_nomination:
+            by_nomination[nom_id] = []
+        by_nomination[nom_id].append({"id": r[1], "name": r[2], "votes": r[3]})
+
+    return {"statusCode": 200, "headers": CORS_HEADERS, "body": json.dumps({"results": by_nomination})}
