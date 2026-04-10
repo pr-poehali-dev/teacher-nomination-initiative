@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Icon from "@/components/ui/icon";
 
 const VOTE_URL = "https://functions.poehali.dev/30fb8da2-823b-4110-b970-1f5233db5a7c";
@@ -32,23 +32,41 @@ const Results = () => {
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState<Status>("login");
   const [data, setData] = useState<Record<number, Teacher[]>>({});
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const passwordRef = useRef("");
+
+  const fetchResults = async (pwd: string) => {
+    try {
+      const res = await fetch(
+        `${VOTE_URL}?action=all_results&password=${encodeURIComponent(pwd)}`
+      );
+      if (res.status === 403) return false;
+      const json = await res.json();
+      setData(json.results || {});
+      setLastUpdated(new Date());
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    if (status !== "loaded") return;
+    const interval = setInterval(() => {
+      fetchResults(passwordRef.current);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, [status]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
-    try {
-      const res = await fetch(
-        `${VOTE_URL}?action=all_results&password=${encodeURIComponent(password)}`
-      );
-      if (res.status === 403) {
-        setStatus("wrong");
-        return;
-      }
-      const json = await res.json();
-      setData(json.results || {});
+    const ok = await fetchResults(password);
+    if (ok) {
+      passwordRef.current = password;
       setStatus("loaded");
-    } catch {
-      setStatus("error");
+    } else {
+      setStatus("wrong");
     }
   };
 
@@ -105,7 +123,11 @@ const Results = () => {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold text-black">Результаты</h1>
-            <p className="text-gray-400 text-sm mt-1">Голосование в реальном времени</p>
+            <p className="text-gray-400 text-sm mt-1">
+              {lastUpdated
+                ? `Обновлено в ${lastUpdated.toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}`
+                : "Голосование в реальном времени"}
+            </p>
           </div>
           <button
             onClick={() => { setStatus("login"); setPassword(""); setData({}); }}
