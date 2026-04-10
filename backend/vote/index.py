@@ -73,8 +73,9 @@ def cast_vote(event: dict) -> dict:
     conn = get_conn()
     cur = conn.cursor()
 
-    cur.execute("SELECT id FROM votes WHERE nomination_id = %s AND voter_fingerprint = %s", (nomination_id, fingerprint))
-    if cur.fetchone():
+    cur.execute("SELECT COUNT(id) FROM votes WHERE nomination_id = %s AND voter_fingerprint = %s", (nomination_id, fingerprint))
+    vote_count = cur.fetchone()[0]
+    if vote_count >= 100:
         conn.close()
         return {"statusCode": 409, "headers": CORS_HEADERS, "body": json.dumps({"error": "already_voted"})}
 
