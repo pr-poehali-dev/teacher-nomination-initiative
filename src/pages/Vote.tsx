@@ -18,6 +18,7 @@ const nominations: Record<number, { title: string; emoji: string }> = {
   11: { title: "Slay SCHOOL учитель иностранных языков", emoji: "🌍" },
   12: { title: "Slay SCHOOL учитель обществознания", emoji: "🏛️" },
   13: { title: "Slay SCHOOL учитель истории", emoji: "📜" },
+  14: { title: "Slay SCHOOL учитель литературы", emoji: "📖" },
 };
 
 interface Teacher {

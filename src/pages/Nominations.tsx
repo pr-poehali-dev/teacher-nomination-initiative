@@ -16,6 +16,7 @@ const nominations = [
   { id: 11, title: "Slay SCHOOL учитель иностранных языков", emoji: "🌍", desc: "Лучший учитель иностранных языков" },
   { id: 12, title: "Slay SCHOOL учитель обществознания", emoji: "🏛️", desc: "Лучший учитель обществознания" },
   { id: 13, title: "Slay SCHOOL учитель истории", emoji: "📜", desc: "Лучший учитель истории" },
+  { id: 14, title: "Slay SCHOOL учитель литературы", emoji: "📖", desc: "Лучший учитель литературы" },
 ];
 
 const Nominations = () => {
